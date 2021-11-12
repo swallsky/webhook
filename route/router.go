@@ -13,6 +13,8 @@ func InitRouter() *gin.Engine {
 	r.GET("/", app.Home)
 	//日志测试
 	r.GET("/logtest", app.LogTest)
+	//post测试
+	r.POST("indexpost", app.IndexPost)
 
 	return r
 }
