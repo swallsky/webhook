@@ -22,6 +22,7 @@ func IndexPost(c *gin.Context) {
 	json.Unmarshal(data, &postData)
 
 	c.JSON(200, gin.H{
-		"ref": postData["ref"],
+		"ref":        postData["ref"],
+		"event_name": postData["event_name"],
 	})
 }
