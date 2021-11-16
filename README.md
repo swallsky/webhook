@@ -12,11 +12,23 @@ esac
 - 执行依耐安装(go mod tidy)
 
 ### 编译webhooks程序
+- 本机版
 ```
 go build -o webhooks main.go
+```
+- linux版
+```
+GOOS=linux GOARCH=amd64 go build -o webhooks main.go
 ```
 
 ### 启动webhooks程序 (端口号默认为8080)
 ```
 ./webhooks -p 8080 
+```
+
+### 添加webhooks(请自行替换域名)
+```
+# post
+https://domain/webhooks
+# token 为bin目录下文件名${token}.ref.sh中${token}部分
 ```
