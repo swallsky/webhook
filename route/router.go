@@ -15,6 +15,8 @@ func InitRouter() *gin.Engine {
 	r.GET("/logtest", app.LogTest)
 	//post测试
 	r.POST("indexpost", app.IndexPost)
+	// shell测试
+	r.GET("shelltest", app.ShellTest)
 
 	return r
 }
