@@ -7,6 +7,7 @@ import (
 	"reflect"
 
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 )
 
 func Home(c *gin.Context) {
@@ -25,13 +26,15 @@ func IndexPost(c *gin.Context) {
 	json.Unmarshal(data, &postData)
 
 	fmt.Println(reflect.TypeOf(postData["commits"]))
-	fmt.Println(reflect.TypeOf(postData["commits"]))
+
+	// Info 级别日志
+	Logger().WithFields(logrus.Fields{
+		"token": c.Request.Header["X-Gitlab-Token"][0],
+		"ref":   postData["ref"],
+	}).Info(postData["user_name"], " push")
 
 	c.JSON(200, gin.H{
-		"token":         c.Request.Header["X-Gitlab-Token"][0], //获取webhook的token值
-		"ref":           postData["ref"],                       //提交的版本信息
-		"user_name":     postData["user_name"],                 //gitlab代码提交者昵称
-		"user_username": postData["user_username"],             //gitlab代码提交者用户名
-		"commits":       postData["commits"],                   //本地提交的信息
+		"status": 200,  //状态
+		"msg":    "ok", //返回结果
 	})
 }
