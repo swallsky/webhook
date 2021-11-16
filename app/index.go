@@ -17,9 +17,9 @@ func Home(c *gin.Context) {
 }
 
 /**
- * post测试
+ * WebHooks
  */
-func IndexPost(c *gin.Context) {
+func WebHooks(c *gin.Context) {
 	// 获取提交字段
 	var postData map[string]interface{}
 	data, _ := ioutil.ReadAll(c.Request.Body)

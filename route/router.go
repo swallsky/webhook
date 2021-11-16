@@ -13,10 +13,10 @@ func InitRouter() *gin.Engine {
 	r.GET("/", app.Home)
 	//日志测试
 	r.GET("/logtest", app.LogTest)
-	//post测试
-	r.POST("indexpost", app.IndexPost)
 	// shell测试
 	r.GET("shelltest", app.ShellTest)
+	//webhooks
+	r.POST("webhooks", app.WebHooks)
 
 	return r
 }
