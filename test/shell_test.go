@@ -7,7 +7,7 @@ import (
 
 //shell 测试
 func TestShell(t *testing.T) {
-	command := `../bin/test.sh .`
+	command := `./bin/test.sh .`
 	cmd := exec.Command("/bin/bash", "-c", command)
 	output, err := cmd.Output()
 	if err != nil {

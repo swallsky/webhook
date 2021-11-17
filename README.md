@@ -11,6 +11,14 @@ esac
 - 安装go环境(以及go mod)
 - 执行依耐安装(go mod tidy)
 
+### 测试模块
+```
+// 模块运行
+go test -v test/shell_test.go
+// 方法运行
+go test -v -run TestShell test/shell_test.go
+```
+
 ### 编译webhooks程序
 - 本机版
 ```
