@@ -12,7 +12,7 @@ import (
 
 func Home(c *gin.Context) {
 	c.JSON(200, gin.H{
-		"dsn": "dsn",
+		"hello": "webhooks",
 	})
 }
 
