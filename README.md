@@ -26,7 +26,7 @@ go build -o webhooks main.go
 ```
 - linux版
 ```
-GOOS=linux GOARCH=amd64 go build -o webhooks main.go
+GOOS=linux GOARCH=amd64 go build -o hook-linux main.go
 ```
 
 ### 启动webhooks程序 (端口号默认为8080)
