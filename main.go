@@ -32,6 +32,7 @@ func main() {
 	listenSignal(server)
 }
 
+// 监听退出信号
 func listenSignal(httpSrv *http.Server) {
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)
