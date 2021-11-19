@@ -43,6 +43,7 @@ func listenSignal(httpSrv *http.Server) {
 	<-quit
 	log.Println("Shutdown Server ...")
 
+	//5秒后安全的退出程序
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	if err := httpSrv.Shutdown(ctx); err != nil {
