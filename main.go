@@ -25,8 +25,12 @@ func main() {
 		Handler: router,
 	}
 
-	// 启动服务
-	go server.ListenAndServe()
+	go func() {
+		// 连接服务
+		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Fatalf("listen: %s\n", err)
+		}
+	}()
 
 	// 平滑重启
 	listenSignal(server)
