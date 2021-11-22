@@ -29,9 +29,14 @@ go build -o webhooks main.go
 GOOS=linux GOARCH=amd64 go build -o hook-linux main.go
 ```
 
-### 启动webhooks程序 (端口号默认为8080)
+### 启动webhooks服务 (端口号默认为8080)
 ```
-./webhooks -p 8080 
+./webhook server start -p 8080
+```
+
+### 关闭webhooks服务
+```
+./webhook server stop
 ```
 
 ### 添加webhooks(请自行替换域名)
