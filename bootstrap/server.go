@@ -9,16 +9,12 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/spf13/cobra"
-
 	"webhook.com/route"
 )
 
 // 启动服务
 // port 启动端口号
-func ServerStart(cmd *cobra.Command, args []string) {
-	port, _ := cmd.Flags().GetString("port")
-
+func ServerStart(host string, port string) {
 	//路由初始化
 	router := route.InitRouter()
 	// 服务初始化

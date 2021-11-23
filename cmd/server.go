@@ -1,10 +1,28 @@
 package cmd
 
 import (
-	"webhook.com/bootstrap"
-
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
+	"webhook.com/bootstrap"
 )
+
+var Config struct {
+	host string
+	port string
+}
+
+// 初始化
+func init() {
+	conf := viper.New()
+	conf.AddConfigPath("./")
+	conf.SetConfigName("conf")
+	conf.SetConfigType("yaml")
+	if err := conf.ReadInConfig(); err != nil {
+		panic(err)
+	}
+	Config.host = conf.GetString("server.host") //监听主机ip
+	Config.port = conf.GetString("server.port") //监听端口
+}
 
 // 服务根命令
 var serverCmd = &cobra.Command{
@@ -19,7 +37,9 @@ var serverCmd = &cobra.Command{
 var startCmd = &cobra.Command{
 	Use:   "start [flags]",
 	Short: "Server start [flags]",
-	Run:   bootstrap.ServerStart,
+	Run: func(cmd *cobra.Command, args []string) {
+		bootstrap.ServerStart(Config.host, Config.port)
+	},
 }
 
 // 停止服务
@@ -33,8 +53,7 @@ var stopCmd = &cobra.Command{
 
 // 初始化
 func init() {
-	startCmd.Flags().String("port", "8080", "server port") //默认启动的端口
-	serverCmd.AddCommand(startCmd)                         //启动服务命令
-	serverCmd.AddCommand(stopCmd)                          //停止服务
-	rootCmd.AddCommand(serverCmd)                          //添加服务
+	serverCmd.AddCommand(startCmd) //启动服务命令
+	serverCmd.AddCommand(stopCmd)  //停止服务
+	rootCmd.AddCommand(serverCmd)  //添加服务
 }
