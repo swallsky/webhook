@@ -31,7 +31,10 @@ GOOS=linux GOARCH=amd64 go build -o hook-linux main.go
 
 ### 启动webhooks服务 (端口号默认为8080)
 ```
-./webhook server start -p 8080
+# 调试模式
+./webhook server start
+# daemon模式
+./webhook server start -d=true
 ```
 
 ### 关闭webhooks服务
