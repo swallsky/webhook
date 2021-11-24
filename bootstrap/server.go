@@ -2,6 +2,7 @@ package bootstrap
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -19,8 +20,10 @@ func ServerStart(host string, port string) {
 	router := route.InitRouter()
 	// 服务初始化
 	server := &http.Server{
-		Addr:    ":" + port,
-		Handler: router,
+		Addr:         ":" + port,
+		Handler:      router,
+		ReadTimeout:  10 * time.Second, //读取超时时间
+		WriteTimeout: 10 * time.Second, //写超时时间
 	}
 
 	go func() {
@@ -48,4 +51,16 @@ func listenSignal(httpSrv *http.Server) {
 		log.Fatal("Server Shundown:", err)
 	}
 	log.Println("Server exiting")
+}
+
+// 关闭服务
+func ServerStop(host string, port string) {
+	pid := os.Getppid()
+	fmt.Println(pid)
+	// err := syscall.Kill(24331, syscall.SIGINT)
+	// if err != nil {
+	// 	log.Println("Server logout fail!")
+	// } else {
+	// 	log.Println("Server logout successful!")
+	// }
 }
