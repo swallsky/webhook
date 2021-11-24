@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
 	"os/exec"
 	"syscall"
@@ -71,6 +72,11 @@ func daemonProcess(logfile string) {
 	c.SysProcAttr = &syscall.SysProcAttr{Setsid: true} //TODO TEST
 
 	if err := c.Start(); err != nil {
+		panic(err)
+	}
+	//将当前进程id写入文件中
+	err = ioutil.WriteFile("./runtime/.pid", []byte(fmt.Sprint(c.Process.Pid)), 0755)
+	if err != nil {
 		panic(err)
 	}
 	_, _ = fp.WriteString(fmt.Sprintf("[PID] %d Start At %s\n", c.Process.Pid, time.Now().Format("2006-01-02 15:04:05")))

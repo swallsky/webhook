@@ -2,11 +2,12 @@ package bootstrap
 
 import (
 	"context"
-	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
+	"strconv"
 	"syscall"
 	"time"
 
@@ -55,12 +56,19 @@ func listenSignal(httpSrv *http.Server) {
 
 // 关闭服务
 func ServerStop(host string, port string) {
-	pid := os.Getppid()
-	fmt.Println(pid)
-	// err := syscall.Kill(24331, syscall.SIGINT)
-	// if err != nil {
-	// 	log.Println("Server logout fail!")
-	// } else {
-	// 	log.Println("Server logout successful!")
-	// }
+	pid, err := ioutil.ReadFile("./runtime/.pid")
+	if err != nil {
+		panic(err)
+	}
+	ppids := string(pid)             //将byte类型转换为string
+	ppid, err := strconv.Atoi(ppids) //将string类型转换为int
+	if err != nil {
+		panic(err)
+	}
+	err = syscall.Kill(ppid, syscall.SIGINT) //关闭服务ctrl+c 2
+	if err != nil {
+		log.Println("Server logout fail!")
+	} else {
+		log.Println("Server logout successful!")
+	}
 }
