@@ -1,4 +1,4 @@
 server:
-  logfile: daemon.log
+  logfile: runtime/daemon.log
   host: 127.0.0.1
   port: 8080
