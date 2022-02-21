@@ -1,3 +1,4 @@
 bin/*.ref.sh
 .vscode/
 runtime/*
+build/*

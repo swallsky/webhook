@@ -22,11 +22,11 @@ go test -v -run TestShell test/shell_test.go
 ### 编译webhooks程序
 - 本机版
 ```
-go build -o webhooks main.go
+go build -o build/wh-mac main.go
 ```
 - linux版
 ```
-GOOS=linux GOARCH=amd64 go build -o hook-linux main.go
+GOOS=linux GOARCH=amd64 go build -o build/wh-linux main.go
 ```
 
 ### 启动webhooks服务 (端口号默认为8080)
