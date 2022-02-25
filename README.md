@@ -34,7 +34,7 @@ GOOS=linux GOARCH=amd64 go build -o build/wh-linux main.go
 # 调试模式
 ./webhook server start
 # daemon模式
-./webhook server start -d=true
+./webhook server start -d
 ```
 
 ### 关闭webhooks服务

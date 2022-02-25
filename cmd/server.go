@@ -13,9 +13,6 @@ import (
 	"webhook.com/bootstrap"
 )
 
-// 是否开启daemon进程
-var daemon bool
-
 // 服务相关的配置
 var Config struct {
 	logfile string
@@ -88,6 +85,7 @@ var startCmd = &cobra.Command{
 	Use:   "start [flags]",
 	Short: "Server start [flags]",
 	Run: func(cmd *cobra.Command, args []string) {
+		daemon, _ := cmd.Flags().GetBool("daemon")
 		if daemon { //是否启动daemon进程
 			daemonProcess(Config.logfile)
 		}
@@ -106,8 +104,8 @@ var stopCmd = &cobra.Command{
 
 // 初始化
 func init() {
-	startCmd.Flags().BoolVarP(&daemon, "daemon", "d", false, "test info") //只能用于当前命令
-	serverCmd.AddCommand(startCmd)                                        //启动服务命令
-	serverCmd.AddCommand(stopCmd)                                         //停止服务
-	rootCmd.AddCommand(serverCmd)                                         //添加服务
+	startCmd.Flags().BoolP("daemon", "d", false, "是否开启守护进程") //只能用于当前命令
+	serverCmd.AddCommand(startCmd)                           //启动服务命令
+	serverCmd.AddCommand(stopCmd)                            //停止服务
+	rootCmd.AddCommand(serverCmd)                            //添加服务
 }
