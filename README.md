@@ -13,6 +13,7 @@ esac
 
 ### 安装热更新
 ```
+# https://github.com/cosmtrek/air
 curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
 ```
 
