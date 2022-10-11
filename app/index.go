@@ -3,7 +3,7 @@ package app
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"reflect"
 
 	"github.com/gin-gonic/gin"
@@ -22,7 +22,7 @@ func Home(c *gin.Context) {
 func WebHooks(c *gin.Context) {
 	// 获取提交字段
 	var postData map[string]interface{}
-	data, _ := ioutil.ReadAll(c.Request.Body)
+	data, _ := io.ReadAll(c.Request.Body)
 	json.Unmarshal(data, &postData)
 
 	fmt.Println(reflect.TypeOf(postData["commits"]))

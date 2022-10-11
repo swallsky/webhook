@@ -11,6 +11,16 @@ esac
 - 安装go环境(以及go mod)
 - 执行依耐安装(go mod tidy)
 
+### 安装热更新
+```
+curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
+```
+
+### 开发模式
+```
+air
+```
+
 ### 测试模块
 ```
 // 模块运行
