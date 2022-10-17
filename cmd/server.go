@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"syscall"
@@ -72,7 +71,7 @@ func daemonProcess(logfile string) {
 		panic(err)
 	}
 	//将当前进程id写入文件中
-	err = ioutil.WriteFile("./runtime/.pid", []byte(fmt.Sprint(c.Process.Pid)), 0755)
+	err = os.WriteFile("./runtime/.pid", []byte(fmt.Sprint(c.Process.Pid)), 0755)
 	if err != nil {
 		panic(err)
 	}
